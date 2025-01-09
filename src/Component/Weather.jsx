@@ -60,8 +60,7 @@ let Weather =()=>{
                 cityName: data.name,
                 icon: icon
 
-            })
-            console.log(data);  
+            })  
             
             
             
