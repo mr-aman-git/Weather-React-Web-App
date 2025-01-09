@@ -61,6 +61,7 @@ let Weather =()=>{
                 icon: icon
 
             })
+            console.log(data);  
             
             
             
