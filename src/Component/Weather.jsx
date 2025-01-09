@@ -9,6 +9,7 @@ import snow_icon from '../assets/snow.png'
 import wind_icon from '../assets/wind.png'
 import humidity_icon from '../assets/humidity.png'
 import { useEffect, useState } from "react";
+let api= "8a30047e128dbe539d55e1673fc168a1";
 
 
 let Weather =()=>{
@@ -18,9 +19,6 @@ let Weather =()=>{
         setInputData(event.target.value);
     }
     let btn= ()=>{
-        // useEffect(()=>{
-        //     search(inputDta);
-        //     },[]);
         search(inputDta);
 
     }
@@ -44,30 +42,33 @@ let Weather =()=>{
     
 
 
-    let api= "8a30047e128dbe539d55e1673fc168a1";
+    
     let search= async (city)=>{
+        if(city===""){
+            alert("Enter City Name");
+            return
+        }
         try {
             
             let url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api}`;
             let respones= await fetch(url);
             let data= await respones.json();
-            let icon= allIcon[data.weather[0].icon] || clear_icon;
+            let icons= allIcon[data.weather[0].icon] || clear_icon;
 
             setWeatherData({
+                icon: icons,
                 tempData: Math.floor(data.main.temp),
                 humidityData: data.main.humidity,
                 windData: data.wind.speed,
                 cityName: data.name,
-                icon: icon
-
+                
             })  
+            console.log(data);
             
             
-            
-            
-            
-        } catch (error) {
-           console.log(error);
+            } catch (error) {
+                setWeatherData(false);
+                console.error("Error in fetching weather data");
             
         }
     };
@@ -76,13 +77,14 @@ let Weather =()=>{
 
     return(
         <div className="weather">
+            <h2>Weather Forecast</h2>
 
             <div className="search-bar">
                 <input type="text" placeholder="Enter City Name" onChange={userData}/>
                 <img src={search_icon} alt="" onClick={btn}/>
             </div>
-            
-            <img src={weatherData.icon} alt="" className="weather-icon"/>
+            {weatherData?<>
+                <img src={weatherData.icon} alt="" className="weather-icon"/>
             <p className="temprature">{weatherData.tempData}°C</p>
             <p className="location">{weatherData.cityName}</p>
 
@@ -104,6 +106,12 @@ let Weather =()=>{
                 </div>
 
             </div>
+            
+            </>:<></>}
+
+                
+            
+            
 
         </div>
     )

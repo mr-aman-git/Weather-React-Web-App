@@ -5,7 +5,9 @@
 }
 
 .App{
-  background: pink;
+  background-image: url("https://i.pinimg.com/736x/32/3f/8e/323f8eaeced500e7e3bd3d5ec2461107.jpg");
   min-height: 100vh;
   display: grid;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
