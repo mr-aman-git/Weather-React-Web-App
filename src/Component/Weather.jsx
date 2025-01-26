@@ -63,7 +63,6 @@ let Weather =()=>{
                 cityName: data.name,
                 
             })  
-            console.log(data);
             
             
             } catch (error) {
