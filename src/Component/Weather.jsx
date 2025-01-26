@@ -10,6 +10,7 @@ import wind_icon from '../assets/wind.png'
 import humidity_icon from '../assets/humidity.png'
 import { useEffect, useState } from "react";
 let api= "8a30047e128dbe539d55e1673fc168a1";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 let Weather =()=>{
@@ -45,7 +46,9 @@ let Weather =()=>{
     
     let search= async (city)=>{
         if(city===""){
-            alert("Enter City Name");
+            toast.error('Enter City Name!', {
+                position: "top-center",
+                });
             return
         }
         try {
@@ -110,7 +113,7 @@ let Weather =()=>{
 
                 
             
-            
+            <ToastContainer />
 
         </div>
     )
